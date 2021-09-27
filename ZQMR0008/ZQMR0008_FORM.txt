@@ -154,7 +154,7 @@ form imprime_formulario .
 *pega linhas selecionadas
    gr_selections = lo_salv_table->get_selections( ).
    gt_rows = gr_selections->get_selected_rows( ).
-*exibe warning, caso o usuário quiser imprimir o formulário vazio, já que o tipo w permite que o usuário prossiga ma função
+*exibe warning, caso o usuário deseje imprimir o formulário vazio, já que o tipo w permite que o usuário prossiga na função
    if gt_rows is initial.
      message 'Selecione ao menos uma linha para a impressão.' type 'W'.
    endif.
