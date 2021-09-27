@@ -1,2 +1,2 @@
 # ABAP
-Abap Codes.
+Source code of ABAP developments.
