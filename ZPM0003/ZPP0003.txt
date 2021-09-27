@@ -1,15 +1,15 @@
-&---------------------------------------------------------------------
-& Report  ZPM0003
-&
-&---------------------------------------------------------------------
-&AutorModificador  Chamado  Data
-&Luis Aquino         25773     28052020
-&
-&---------------------------------------------------------------------
+*&---------------------------------------------------------------------*
+*& Report  ZPM0003
+*&
+*&---------------------------------------------------------------------*
+*&Autor/Modificador | Chamado | Data
+*&Luis Aquino         25773     28/05/2020
+*&
+*&---------------------------------------------------------------------*
 report  zpm0003.
 type-pools sscr.
 
-tables viqmelst,
+tables: viqmelst,
         viaufkst,
         itob,
         rihaufk_list,
@@ -22,33 +22,33 @@ tables viqmelst,
         iloa.
 
 type-pools slis .
-types  begin of ty_pmp,
-  nobjnr type viaufkst-objnr, Nº objeto
-  qmnum type viqmelst-qmnum, Nº da nota
-  qmtxt type viqmelst-qmtxt, Texto breve
-  stat(5)  type c,           Status
-  erdat type viqmelst-erdat, Data de criação do registro
-  objnr type viaufkst-objnr, Nº objeto
-  aufnr type viaufkst-aufnr, Nº ordem
-  ktext type viaufkst-ktext, Tipo de ordem
-  auart type viaufkst-auart, Tipo de ordem
-  plgrp type viaufkst-plgrp, Grupo de planejamentodepartamento responsável
-  iwerk type viqmelst-iwerk, Centro de planejamento de manutenção
-  equnr type viqmelst-equnr, Nº equipamento
-  qmnam type viqmelst-qmnam, Nome do autor da nota
-  qmart type viqmelst-qmart, Tipo de nota
-  ilart type viaufkst-ilart, Tipo de atividade de manutenção
-  addat type viaufkst-addat, Ordem-PM Data de referência
-  aduhr type viaufkst-aduhr, Hora da data de referência
-  kostv type viaufkst-kostv, Centro de custo responsável
-  kostl type viaufkst-kostl, Centro de custo
-  ingpr type viaufkst-ingpr, Grupo de planejamentodepartamento responsável
-  iphas type viaufkst-iphas, Fase de processamento da manutenção
-  eqktx type eqkt-eqktx,     Denominação do objeto técnico
-  eqfnr type iloa-eqfnr,     Campo de ordenação
+types : begin of ty_pmp,
+  nobjnr type viaufkst-objnr, "Nº objeto
+  qmnum type viqmelst-qmnum, "Nº da nota
+  qmtxt type viqmelst-qmtxt, "Texto breve
+  stat(5)  type c,           "Status"
+  erdat type viqmelst-erdat, "Data de criação do registro
+  objnr type viaufkst-objnr, "Nº objeto
+  aufnr type viaufkst-aufnr, "Nº ordem
+  ktext type viaufkst-ktext, "Tipo de ordem
+  auart type viaufkst-auart, "Tipo de ordem
+  plgrp type viaufkst-plgrp, "Grupo de planejamento/departamento responsável
+  iwerk type viqmelst-iwerk, "Centro de planejamento de manutenção
+  equnr type viqmelst-equnr, "Nº equipamento
+  qmnam type viqmelst-qmnam, "Nome do autor da nota
+  qmart type viqmelst-qmart, "Tipo de nota
+  ilart type viaufkst-ilart, "Tipo de atividade de manutenção
+  addat type viaufkst-addat, "Ordem-PM: Data de referência
+  aduhr type viaufkst-aduhr, "Hora da data de referência
+  kostv type viaufkst-kostv, "Centro de custo responsável
+  kostl type viaufkst-kostl, "Centro de custo
+  ingpr type viaufkst-ingpr, "Grupo de planejamento/departamento responsável
+  iphas type viaufkst-iphas, "Fase de processamento da manutenção
+  eqktx type eqkt-eqktx,     "Denominação do objeto técnico
+  eqfnr type iloa-eqfnr,     "Campo de ordenação
 end of ty_pmp.
 
-types  begin of ty_excluir,
+types : begin of ty_excluir,
 
   objnr type viaufkst-objnr,
   stat  type bsvx-sttxt,
@@ -56,96 +56,96 @@ types  begin of ty_excluir,
 end of ty_excluir.
 
 
-types  begin of ty_pmpo,
+types : begin of ty_pmpo,
   sel,
-  nobjnr type viaufkst-objnr, Nº objeto
-  qmnum  type viqmelst-qmnum, Nº da nota
-  qmtxt  type viqmelst-qmtxt, Texto breve
+  nobjnr type viaufkst-objnr, "Nº objeto
+  qmnum  type viqmelst-qmnum, "Nº da nota
+  qmtxt  type viqmelst-qmtxt, "Texto breve
   statind(5)   type c,
   erdat  type viqmelst-erdat,
-  nudate type jcds-udate, Data de criação do registro
-  nutime type jcds-utime, Hora da nota
-  stat   type bsvx-sttxt,     Status individual de um objeto
-  statn  type bsvx-sttxt,         Status individual de um objeto
-  nufdate type jcds-udate, Data de criação do registro
-  nuftime type jcds-utime, Hora da nota
-  objnr type viaufkst-objnr, Nº objeto
-  aufnr  type viaufkst-aufnr, Nº ordem
-  ktext  type viaufkst-ktext, Nº ordem
-  auart  type viaufkst-auart, Tipo de ordem
-  udate  type jcds-udate,     Ordem-PM Data de referência
-  utime  type jcds-utime,     Hora da data de referência
-  plgrp  type viaufkst-plgrp,  Grupo de planejamentodepartamento responsável
-  iwerk  type viaufkst-iwerk, Centro de planejamento de manutenção
-  astnr  type viaufkst-astnr, Status da ordem
-  equnr  type viqmelst-equnr, Nº equipamento
-  qmnam  type viqmelst-qmnam, Nome do autor da nota
-  qmart  type viqmelst-qmart, Tipo de nota
-  ilart  type viaufkst-ilart, Tipo de atividade de manutenção
-  ufdate type jcds-udate,     Fim confirmado da ordem
-  uftime type jcds-utime,     Fim confirmado da ordem (hora)
-  uadate type jcds-udate,     Data inicial de apontamento
-  uatime type jcds-utime,     Hora inicial de apontamento
-  ufadate type jcds-udate,    Data final de apontamento
-  ufatime type jcds-utime,    Hora final de apontamento
-  addat  type viaufkst-addat, Ordem-PM Data de referência
-  aduhr  type viaufkst-aduhr, Hora da data de referência
-  kostv  type viaufkst-kostv, Centro de custo responsável
-  kostl  type viaufkst-kostl, Centro de custo
-  ingpr  type viaufkst-ingpr, Grupo de planejamentodepartamento responsável
-  iphas  type viaufkst-iphas, Fase de processamento da manutenção
-  eqktx  type eqkt-eqktx,     Denominação do objeto técnico
-  wrt03  type pmco-wrt03,      Valor período em moeda de Ledger
+  nudate type jcds-udate, "Data de criação do registro
+  nutime type jcds-utime, "Hora da nota
+  stat   type bsvx-sttxt,     "Status individual de um objeto
+  statn  type bsvx-sttxt,         "Status individual de um objeto
+  nufdate type jcds-udate, "Data de criação do registro
+  nuftime type jcds-utime, "Hora da nota
+  objnr type viaufkst-objnr, "Nº objeto
+  aufnr  type viaufkst-aufnr, "Nº ordem
+  ktext  type viaufkst-ktext, "Nº ordem
+  auart  type viaufkst-auart, "Tipo de ordem
+  udate  type jcds-udate,     "Ordem-PM: Data de referência
+  utime  type jcds-utime,     "Hora da data de referência
+  plgrp  type viaufkst-plgrp,  "Grupo de planejamento/departamento responsável
+  iwerk  type viaufkst-iwerk, "Centro de planejamento de manutenção
+  astnr  type viaufkst-astnr, "Status da ordem
+  equnr  type viqmelst-equnr, "Nº equipamento
+  qmnam  type viqmelst-qmnam, "Nome do autor da nota
+  qmart  type viqmelst-qmart, "Tipo de nota
+  ilart  type viaufkst-ilart, "Tipo de atividade de manutenção
+  ufdate type jcds-udate,     "Fim confirmado da ordem
+  uftime type jcds-utime,     "Fim confirmado da ordem (hora)
+  uadate type jcds-udate,     "Data inicial de apontamento
+  uatime type jcds-utime,     "Hora inicial de apontamento
+  ufadate type jcds-udate,    "Data final de apontamento
+  ufatime type jcds-utime,    "Hora final de apontamento
+  addat  type viaufkst-addat, "Ordem-PM: Data de referência
+  aduhr  type viaufkst-aduhr, "Hora da data de referência
+  kostv  type viaufkst-kostv, "Centro de custo responsável
+  kostl  type viaufkst-kostl, "Centro de custo
+  ingpr  type viaufkst-ingpr, "Grupo de planejamento/departamento responsável
+  iphas  type viaufkst-iphas, "Fase de processamento da manutenção
+  eqktx  type eqkt-eqktx,     "Denominação do objeto técnico
+  wrt03  type pmco-wrt03,      "Valor período em moeda de Ledger
   eqfnr  type iloa-eqfnr,
 end of ty_pmpo.
 
-types  begin of ty_pmpoo,
+types : begin of ty_pmpoo,
   sel,
-  nobjnr     type viaufkst-objnr, Nº objeto
-  qmnum      type viqmelst-qmnum, Nº da nota
-  qmtxt      type viqmelst-qmtxt, Texto breve
+  nobjnr     type viaufkst-objnr, "Nº objeto
+  qmnum      type viqmelst-qmnum, "Nº da nota
+  qmtxt      type viqmelst-qmtxt, "Texto breve
   statind(5) type c,
   erdat      type viqmelst-erdat,
-  nudate     type jcds-udate, Data de criação do registro
-  nutime     type jcds-utime, Hora da nota
-  stat       type bsvx-sttxt,     Status individual de um objeto
-  statn      type bsvx-sttxt,         Status individual de um objeto
+  nudate     type jcds-udate, "Data de criação do registro
+  nutime     type jcds-utime, "Hora da nota
+  stat       type bsvx-sttxt,     "Status individual de um objeto
+  statn      type bsvx-sttxt,         "Status individual de um objeto
   diffdate   type p decimals 2,
   diffdate2  type p decimals 2,
   diffdatee(8),
-  nufdate    type jcds-udate, Data de criação do registro
-  nuftime    type jcds-utime, Hora da nota
-  objnr      type viaufkst-objnr, Nº objeto
-  aufnr      type viaufkst-aufnr, Nº ordem
-  ktext      type viaufkst-ktext, Nº ordem
-  auart      type viaufkst-auart, Tipo de ordem
-  udate      type jcds-udate,     Ordem-PM Data de referência
-  utime   type jcds-utime,     Hora da data de referência
-  plgrp   type viaufkst-plgrp,  Grupo de planejamentodepartamento responsável
-  iwerk   type viaufkst-iwerk, Centro de planejamento de manutenção
-  astnr   type viaufkst-astnr, Status da ordem
-  equnr   type viqmelst-equnr, Nº equipamento
-  qmnam   type viqmelst-qmnam, Nome do autor da nota
-  qmart   type viqmelst-qmart, Tipo de nota
-  ilart   type viaufkst-ilart, Tipo de atividade de manutenção
-  ufdate  type jcds-udate,     Fim confirmado da ordem
-  uftime  type jcds-utime,     Fim confirmado da ordem (hora)
-  uadate  type jcds-udate,     Data inicial de apontamento
-  uatime  type jcds-utime,     Hora inicial de apontamento
-  ufadate type jcds-udate,    Data final de apontamento
-  ufatime type jcds-utime,    Hora final de apontamento
-  addat   type viaufkst-addat, Ordem-PM Data de referência
-  aduhr   type viaufkst-aduhr, Hora da data de referência
-  kostv   type viaufkst-kostv, Centro de custo responsável
-  kostl   type viaufkst-kostl, Centro de custo
-  ingpr   type viaufkst-ingpr, Grupo de planejamentodepartamento responsável
-  iphas   type viaufkst-iphas, Fase de processamento da manutenção
-  eqktx   type eqkt-eqktx,     Denominação do objeto técnico
-  wrt03   type pmco-wrt03,      Valor período em moeda de Ledger
+  nufdate    type jcds-udate, "Data de criação do registro
+  nuftime    type jcds-utime, "Hora da nota
+  objnr      type viaufkst-objnr, "Nº objeto
+  aufnr      type viaufkst-aufnr, "Nº ordem
+  ktext      type viaufkst-ktext, "Nº ordem
+  auart      type viaufkst-auart, "Tipo de ordem
+  udate      type jcds-udate,     "Ordem-PM: Data de referência
+  utime   type jcds-utime,     "Hora da data de referência
+  plgrp   type viaufkst-plgrp,  "Grupo de planejamento/departamento responsável
+  iwerk   type viaufkst-iwerk, "Centro de planejamento de manutenção
+  astnr   type viaufkst-astnr, "Status da ordem
+  equnr   type viqmelst-equnr, "Nº equipamento
+  qmnam   type viqmelst-qmnam, "Nome do autor da nota
+  qmart   type viqmelst-qmart, "Tipo de nota
+  ilart   type viaufkst-ilart, "Tipo de atividade de manutenção
+  ufdate  type jcds-udate,     "Fim confirmado da ordem
+  uftime  type jcds-utime,     "Fim confirmado da ordem (hora)
+  uadate  type jcds-udate,     "Data inicial de apontamento
+  uatime  type jcds-utime,     "Hora inicial de apontamento
+  ufadate type jcds-udate,    "Data final de apontamento
+  ufatime type jcds-utime,    "Hora final de apontamento
+  addat   type viaufkst-addat, "Ordem-PM: Data de referência
+  aduhr   type viaufkst-aduhr, "Hora da data de referência
+  kostv   type viaufkst-kostv, "Centro de custo responsável
+  kostl   type viaufkst-kostl, "Centro de custo
+  ingpr   type viaufkst-ingpr, "Grupo de planejamento/departamento responsável
+  iphas   type viaufkst-iphas, "Fase de processamento da manutenção
+  eqktx   type eqkt-eqktx,     "Denominação do objeto técnico
+  wrt03   type pmco-wrt03,      "Valor período em moeda de Ledger
   eqfnr   type iloa-eqfnr,
 end of ty_pmpoo.
 
-data st_layout   type slis_layout_alv,
+data: st_layout   type slis_layout_alv,
       gv_count    type i,
       i_fcat      type slis_t_fieldcat_alv,
       cont        type i,
@@ -162,7 +162,7 @@ data st_layout   type slis_layout_alv,
       diffdaten   type jcds-udate,
       difftimen   type jcds-utime.
 
-types begin of ty_auxdat,
+types: begin of ty_auxdat,
   objnr type aufk-objnr,
   udate type jcds-udate,
   utime type jcds-utime,
@@ -170,7 +170,7 @@ types begin of ty_auxdat,
   chind type jcds-chind,
 end of ty_auxdat.
 
-types begin of ty_datas,
+types: begin of ty_datas,
 
   objnr  type aufk-objnr,
   udate  type jcds-udate,
@@ -180,7 +180,7 @@ types begin of ty_datas,
 
 end of ty_datas.
 
-types begin of ty_datasaponta,
+types: begin of ty_datasaponta,
 
   aufnr  type aufk-aufnr,
   udate  type jcds-udate,
@@ -191,23 +191,23 @@ types begin of ty_datasaponta,
 
 end of ty_datasaponta.
 
-data wa_fcat like line of i_fcat,
+data: wa_fcat like line of i_fcat,
       f_ucomm like sy-ucomm.
 
-types  begin of ty_tem,
-  nobjnr type viqmelst-objnr,        Nº objeto
-  qmnum  type viqmelst-qmnum,        Nº da nota
-  objnr  type viaufkst-objnr,Nº objeto
-  aufnr  type viaufkst-aufnr,        Nº ordem
+types : begin of ty_tem,
+  nobjnr type viqmelst-objnr,        "Nº objeto
+  qmnum  type viqmelst-qmnum,        "Nº da nota
+  objnr  type viaufkst-objnr,"Nº objeto
+  aufnr  type viaufkst-aufnr,        "Nº ordem
   txt30  type bsvx-sttxt,
-  txt30  TYPE string,
-  iphas  type viaufkst-iphas,        Fase de processamento da manutenção
+ " txt30  TYPE string,
+  iphas  type viaufkst-iphas,        "Fase de processamento da manutenção
   udate  type jcds-udate,
   utime  type jcds-utime,
   aufnra type viaufkst-aufnr,
 end of ty_tem.
 
-types  begin of ty_temm,
+types : begin of ty_temm,
   objnr  type viaufkst-objnr,
   aufnr  type viaufkst-qmnum,
   aufnra type viaufkst-aufnr,
@@ -215,40 +215,40 @@ types  begin of ty_temm,
 
 end of ty_temm.
 
-types  begin of ty_getstatus,
+types : begin of ty_getstatus,
 
   objnr type viaufkst-objnr,
   txt30  type bsvx-sttxt,
 
 end of ty_getstatus.
 
-types  begin of ty_enc,
-  objnr like viaufkst-isdfpsobjnr,
+types : begin of ty_enc,
+  objnr like viaufkst-/isdfps/objnr,
 end of ty_enc.
 
-types begin of ty_snotes,
+types: begin of ty_snotes,
 
-  nobjnr type viqmelst-objnr, Nº objeto
-  qmnum  type viqmelst-qmnum, Nº da nota
-  qmnam  type viqmelst-qmnam, Nome do autor da nota
-  qmtxt  type viqmelst-qmtxt, Texto breve
-  iwerk  type viqmelst-iwerk, Centro de planejamento de manutenção
-  erdat  type viqmelst-erdat, Data de criação do registro
-  mzeit  type viqmelst-mzeit, Hora da nota
-  equnr  type viqmelst-equnr, Nº equipamento
-  qmart  type viqmelst-qmart, Tipo de nota
-  kostl  type viaufkst-kostl, Centro de custo
-  eqktx  type eqkt-eqktx,     Denominação do objeto técnico
+  nobjnr type viqmelst-objnr, "Nº objeto
+  qmnum  type viqmelst-qmnum, "Nº da nota
+  qmnam  type viqmelst-qmnam, "Nome do autor da nota
+  qmtxt  type viqmelst-qmtxt, "Texto breve
+  iwerk  type viqmelst-iwerk, "Centro de planejamento de manutenção
+  erdat  type viqmelst-erdat, "Data de criação do registro
+  mzeit  type viqmelst-mzeit, "Hora da nota
+  equnr  type viqmelst-equnr, "Nº equipamento
+  qmart  type viqmelst-qmart, "Tipo de nota
+  kostl  type viaufkst-kostl, "Centro de custo
+  eqktx  type eqkt-eqktx,     "Denominação do objeto técnico
   eqfnr  type viqmelst-eqfnr,
-  txt30  type bsvx-sttxt,     Linha de status de sistema
+  txt30  type bsvx-sttxt,     "Linha de status de sistema
 
 end of ty_snotes.
 
-types begin of ty_cost,
+types: begin of ty_cost,
 
-  objnr type viaufkst-objnr, Nº da nota
+  objnr type viaufkst-objnr, "Nº da nota
   wrttp type pmco-wrttp,
-  wrt00 type pmco-wrt00,     Valor período em moeda de Ledger
+  wrt00 type pmco-wrt00,     "Valor período em moeda de Ledger
   wrt01 type pmco-wrt01,
   wrt02 type pmco-wrt02,
   wrt03 type pmco-wrt03,
@@ -268,7 +268,7 @@ types begin of ty_cost,
 
 end of ty_cost.
 
-types begin of ty_coca,
+types: begin of ty_coca,
 
   objnr  type coss-objnr,
   wrttp  type coss-wrttp,
@@ -292,7 +292,7 @@ types begin of ty_coca,
 
  end of ty_coca.
 
- types begin of ty_coca2,
+ types: begin of ty_coca2,
 
   objnr type coss-objnr,
   wrttp type coss-wrttp,
@@ -301,15 +301,15 @@ types begin of ty_coca,
 
  end of ty_coca2.
 
-types begin of ty_cost2,
+types: begin of ty_cost2,
 
-objnr type viaufkst-objnr, Nº da nota
+objnr type viaufkst-objnr, "Nº da nota
 wrttp type pmco-wrttp,
-wrt00 type pmco-wrt00,     Valor período em moeda de Ledger
+wrt00 type pmco-wrt00,     "Valor período em moeda de Ledger
 
 end of ty_cost2.
 
-types begin of ty_sorder,
+types: begin of ty_sorder,
   objnr type viaufkst-objnr,
   aufnr type viaufkst-aufnr,
   ktext type viaufkst-ktext,
@@ -328,9 +328,9 @@ types begin of ty_sorder,
   eqfnr type viaufkst-eqfnr,
 end of ty_sorder .
 
-ranges r_ordem for viaufkst-objnr.Objeto da order
+ranges: r_ordem for viaufkst-objnr."Objeto da order
 
-data
+data:
       final   type table of ty_pmp    with header line,
       all     type table of ty_tem    with header line,
       temp    type table of ty_tem    with header line,
@@ -347,7 +347,7 @@ data
       resto  type string,
       mm  type i,
       ss  type i,
-      RESULT type p DECIMALS 2,
+*      RESULT type p DECIMALS 2,
       result type string,
       pmpoutt type table of ty_pmpo   with header line,
       pmpouttt type table of ty_pmpo  with header line,
@@ -416,38 +416,38 @@ selection-screen end of line .
 selection-screen end of block b01.
 
 selection-screen begin of block b02 with frame title text-002.
-select-options
-                s_nnota  for viaufkst-qmnum, Nº da nota
-                s_tnota  for viqmelst-qmart, Tipo de nota
-                s_dnota  for viqmelst-erdat obligatory, Data de criação da nota
+select-options:
+                s_nnota  for viaufkst-qmnum, "Nº da nota
+                s_tnota  for viqmelst-qmart, "Tipo de nota
+                s_dnota  for viqmelst-erdat obligatory, "Data de criação da nota
                 s_hrnota for viqmelst-erzeit,
-                s_nequip for viaufkst-equnr, Nº equipamento
+                s_nequip for viaufkst-equnr, "Nº equipamento
                 s_cmpord for iloa-eqfnr matchcode object zspm0001.
 
 selection-screen end of block b02.
 
 selection-screen begin of block b03 with frame title text-003.
-select-options
-                s_nordem for viaufkst-aufnr, Nº ordem
-                s_tordem for viaufkst-auart, Tipo de ordem
-                s_tativ  for viaufkst-ilart, Tipo de atividade de manutenção
-                stain    for tj02t-txt04 matchcode object z_statuz, Status inclusivo ordem de manuteção
-                staex    for tj02t-istat matchcode object z_statuz, Status exclusivo ordem PM
-                s_gplan  for viaufkst-ingpr, Grupo de planejamento para serviços cliente e manutenção
-                s_resp   for viaufkst-kostv. Centro de custo responsável
+select-options:
+                s_nordem for viaufkst-aufnr, "Nº ordem
+                s_tordem for viaufkst-auart, "Tipo de ordem
+                s_tativ  for viaufkst-ilart, "Tipo de atividade de manutenção
+                stain    for tj02t-txt04 matchcode object z_statuz, "Status inclusivo ordem de manuteção
+                staex    for tj02t-istat matchcode object z_statuz, "Status exclusivo ordem PM
+                s_gplan  for viaufkst-ingpr, "Grupo de planejamento para serviços cliente e manutenção
+                s_resp   for viaufkst-kostv. "Centro de custo responsável
 
 selection-screen end of block b03.
 
 selection-screen begin of block b04 with frame title text-004.
-select-options
-                s_snota  for viaufkst-iwerk, Centro de planejamento de manutenção
-                s_ccusto for viaufkst-kostl. Centro de custo
+select-options:
+                s_snota  for viaufkst-iwerk, "Centro de planejamento de manutenção
+                s_ccusto for viaufkst-kostl. "Centro de custo
 
 selection-screen end of block b04.
 
 selection-screen begin of block b05 with frame title text-005.
 
-parameters 
+parameters :
   p_vari type disvariant-variant.
 
 selection-screen end of block b05.
@@ -457,35 +457,35 @@ at selection-screen on value-request for p_vari.
 
 start-of-selection.
   if statsen = '' and statem = ''.
-    write 'Selecione ao menos um dos status.'.
+    write: 'Selecione ao menos um dos status.'.
     stop.
   endif.
 
-  perform selecionaall.Seleciona somente notas que possuem ordens, excluindo notas sem ordens associadas e ordens sem notas associadas INNER JOIN.
+  perform selecionaall."Seleciona somente notas que possuem ordens, excluindo notas sem ordens associadas e ordens sem notas associadas: INNER JOIN.
 
-  perform montastatusnota.Monta o status das notas usando a função STATUS_TEXT_EDIT, pois foi solicitado que o status aparecesse na ordem da iw23.
-  perform agrupastatus.Monta o status das ordens usando a função STATUS_TEXT_EDIT, pois foi solicitado que o status aparecesse na ordem da iw33.
-  perform selecionaoutput.Associa a tabela do select geral com as tabelas de status .
+  perform montastatusnota."Monta o status das notas usando a função: STATUS_TEXT_EDIT, pois foi solicitado que o status aparecesse na ordem da iw23.
+  perform agrupastatus."Monta o status das ordens usando a função: STATUS_TEXT_EDIT, pois foi solicitado que o status aparecesse na ordem da iw33.
+  perform selecionaoutput."Associa a tabela do select geral com as tabelas de status .
   if staex[] is not initial.
-    perform statusexclusivo.Status exclusivo onde são selecionadas as ordens que possuem o status inclusivo digitado e serão verificadas para exclusão.
+    perform statusexclusivo."Status exclusivo onde são selecionadas as ordens que possuem o status inclusivo digitado e serão verificadas para exclusão.
   endif.
   if stain[] is not initial.
-    perform statusinclusivo.Status inclusivo onde são selecionadas as ordens que não possuem o status exclusivo digitado e serão verificadas para eAhamxclusão.
+    perform statusinclusivo."Status inclusivo onde são selecionadas as ordens que não possuem o status exclusivo digitado e serão verificadas para eAhamxclusão.
   endif.
-  perform deletaxclusivas.Deleta as ordens de acordo com os filtros de inclusivo e exclusivo se houverem, sleciona informações de custos e seleciona novamente os valores de acordo com os filtros
-  perform selecionadatasnotas.Seleciona as datas de abertura das notas e fechamento das notas de acordo com os status I0068 e I0072 respectivamente.
-  perform seleciondadatasordens.Seelciona as datas de abertura, fechamento , primeiro e último apontamento da ordem, de acordo com o status I0001, I0045 e na tabela AFRU.
+  perform deletaxclusivas."Deleta as ordens de acordo com os filtros de inclusivo e exclusivo se houverem, sleciona informações de custos e seleciona novamente os valores de acordo com os filtros
+  perform selecionadatasnotas."Seleciona as datas de abertura das notas e fechamento das notas de acordo com os status I0068 e I0072 respectivamente.
+  perform seleciondadatasordens."Seelciona as datas de abertura, fechamento , primeiro e último apontamento da ordem, de acordo com o status I0001, I0045 e na tabela AFRU.
   perform montafieldcat.
   perform montaalv.
 
-&---------------------------------------------------------------------
-&      Form  SELECIONAALL
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+*&---------------------------------------------------------------------*
+*&      Form  SELECIONAALL
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form selecionaall .
 
   select
@@ -528,7 +528,7 @@ form selecionaall .
            viaufkst~kostv in s_resp   and
            viqmelst~qmnum in s_nnota  and
            viqmelst~erdat in s_dnota  and
-           viaufkst~equnr IN s_nequip AND
+           "viaufkst~equnr IN s_nequip AND
            viqmelst~equnr in s_nequip and
            viaufkst~ingpr in s_gplan  and
            viqmelst~erzeit in s_hrnota and
@@ -537,17 +537,17 @@ form selecionaall .
 
   sort final by objnr.
 
-endform.                     SELECIONAALL
-&---------------------------------------------------------------------
-&      Form  MONTAFIELDCAT
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " SELECIONAALL
+*&---------------------------------------------------------------------*
+*&      Form  MONTAFIELDCAT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form montafieldcat .
-  data vl_pos like sy-cucol.
+  data: vl_pos like sy-cucol.
   clear vl_pos.
 
   vl_pos = vl_pos + 1.
@@ -671,14 +671,14 @@ form montafieldcat .
   append wa_fcat to i_fcat .
   clear wa_fcat .
 
-  vl_pos = vl_pos + 1.
-  wa_fcat-col_pos = vl_pos .
-  wa_fcat-fieldname = 'DIFFDATEE' .
-  wa_fcat-tabname = 'pmpoutttt' .
-  wa_fcat-seltext_m = 'Lead Time' .
-  wa_fcat-just = 'L'.
-  append wa_fcat to i_fcat .
-  clear wa_fcat .
+*  vl_pos = vl_pos + 1.
+*  wa_fcat-col_pos = vl_pos .
+*  wa_fcat-fieldname = 'DIFFDATEE' .
+*  wa_fcat-tabname = 'pmpoutttt' .
+*  wa_fcat-seltext_m = 'Lead Time' .
+*  wa_fcat-just = 'L'.
+*  append wa_fcat to i_fcat .
+*  clear wa_fcat .
 
   vl_pos = vl_pos + 1.
   wa_fcat-col_pos = vl_pos .
@@ -797,23 +797,23 @@ form montafieldcat .
   clear wa_fcat .
 
 
-   vl_pos = vl_pos + 1.
-  wa_fcat-col_pos = vl_pos .
-  wa_fcat-fieldname = 'GETRI' .
-  wa_fcat-tabname = 'pmpoutttt' .
-  wa_fcat-seltext_m = 'Data Fim Real' .
-  wa_fcat-just = 'L'.
-  APPEND wa_fcat TO i_fcat .
-  CLEAR wa_fcat .
-
-   vl_pos = vl_pos + 1.
-  wa_fcat-col_pos = vl_pos .
-  wa_fcat-fieldname = 'GEUZI' .
-  wa_fcat-tabname = 'pmpoutttt' .
-  wa_fcat-seltext_m = 'Hora Fim Real' .
-  wa_fcat-just = 'L'.
-  APPEND wa_fcat TO i_fcat .
-  CLEAR wa_fcat .
+*   vl_pos = vl_pos + 1.
+*  wa_fcat-col_pos = vl_pos .
+*  wa_fcat-fieldname = 'GETRI' .
+*  wa_fcat-tabname = 'pmpoutttt' .
+*  wa_fcat-seltext_m = 'Data Fim Real' .
+*  wa_fcat-just = 'L'.
+*  APPEND wa_fcat TO i_fcat .
+*  CLEAR wa_fcat .
+*
+*   vl_pos = vl_pos + 1.
+*  wa_fcat-col_pos = vl_pos .
+*  wa_fcat-fieldname = 'GEUZI' .
+*  wa_fcat-tabname = 'pmpoutttt' .
+*  wa_fcat-seltext_m = 'Hora Fim Real' .
+*  wa_fcat-just = 'L'.
+*  APPEND wa_fcat TO i_fcat .
+*  CLEAR wa_fcat .
 
   vl_pos = vl_pos + 1.
   wa_fcat-col_pos = vl_pos .
@@ -837,7 +837,7 @@ form montafieldcat .
   wa_fcat-col_pos = vl_pos .
   wa_fcat-fieldname = 'INGPR' .
   wa_fcat-tabname = 'pmpoutttt' .
-  wa_fcat-seltext_m = 'Grupo de planejamentodepartamento responsável' .
+  wa_fcat-seltext_m = 'Grupo de planejamento/departamento responsável' .
   wa_fcat-just = 'L'.
   append wa_fcat to i_fcat .
   clear wa_fcat .
@@ -860,53 +860,53 @@ form montafieldcat .
   append wa_fcat to i_fcat .
   clear wa_fcat .
 
-endform.                     MONTAFIELDCAT
-&---------------------------------------------------------------------
-&      Form  MONTAALV
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " MONTAFIELDCAT
+*&---------------------------------------------------------------------*
+*&      Form  MONTAALV
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form montaalv .
 
   gd_layout-box_fieldname = 'SEL'.
-  set field name to store row selection
-  gd_layout-edit              = 'X'. makes whole ALV table editable
-  gd_layout-zebra             = 'X'.
+  "set field name to store row selection
+  "gd_layout-edit              = 'X'. "makes whole ALV table editable
+  "gd_layout-zebra             = 'X'.
   gd_repid = sy-repid.
   call function 'REUSE_ALV_GRID_DISPLAY'
     exporting
       i_buffer_active         = space
       i_callback_user_command = 'USER_COMMAND'
-      i_callback_pf_status_set = 'ZPF_STATUS'
+*      i_callback_pf_status_set = 'ZPF_STATUS'
       i_callback_program      = gd_repid
       it_fieldcat             = i_fcat[]
       i_save                  = 'A'
       is_layout               = gd_layout
     tables
-      t_outtab                = pmpoutttt      is_variant = st_varia
+      t_outtab                = pmpoutttt      "is_variant = st_varia
     exceptions
       program_error           = 1
       others                  = 2.
 
-  if sy-subrc  0.
-    MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
-          WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
+  if sy-subrc <> 0.
+*    MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
+*          WITH sy-msgv1 sy-msgv2 sy-msgv3 sy-msgv4.
   endif.
 
-  CLEAR st_varia.
+*  CLEAR st_varia.
 
-endform.                     MONTAALV
-&---------------------------------------------------------------------
-&      Form  AGRUPASTATUS
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " MONTAALV
+*&---------------------------------------------------------------------*
+*&      Form  AGRUPASTATUS
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form agrupastatus .
 
   loop at final.
@@ -928,15 +928,15 @@ form agrupastatus .
   sort finaln by objnr.
 
 
-endform.                     AGRUPASTATUS
-&---------------------------------------------------------------------
-&      Form  SELECIONAOUTPUT
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " AGRUPASTATUS
+*&---------------------------------------------------------------------*
+*&      Form  SELECIONAOUTPUT
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form selecionaoutput .
   sort finaln by objnr.
 
@@ -1070,9 +1070,9 @@ form selecionaoutput .
   if stain eq space and staex eq space.
     perform adicionasinglenotes.
   endif.
-  IF soordens = 'X'.
+  "IF soordens = 'X'.
     perform adicionasingleorders.
-  ENDIF.
+  "ENDIF.
   pmpotemp[] = pmpo[].
   clear pmpo[].
 
@@ -1088,15 +1088,15 @@ form selecionaoutput .
 
   endloop.
   clear pmpotemp[].
-endform.                    SELECIONAOUTPUT
-&---------------------------------------------------------------------
-&      Form  MONTASTATUSNOTA
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                   " SELECIONAOUTPUT
+*&---------------------------------------------------------------------*
+*&      Form  MONTASTATUSNOTA
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form montastatusnota .
 
   loop at final.
@@ -1118,18 +1118,18 @@ form montastatusnota .
     clear temp.
   endloop.
 
-  clear final[].
+  "clear final[].
   sort temp by nobjnr ascending.
 
-endform.                     MONTASTATUSNOTA
-&---------------------------------------------------------------------
-&      Form  ADICIONASINGLENOTES
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " MONTASTATUSNOTA
+*&---------------------------------------------------------------------*
+*&      Form  ADICIONASINGLENOTES
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form adicionasinglenotes.
   if statsen = 'X'.
     select  viqmelst~objnr
@@ -1219,19 +1219,19 @@ form adicionasinglenotes.
   endloop.
   clear snote[].
 
-endform.                     ADICIONASINGLENOTES
-&---------------------------------------------------------------------
-&      Form  USER_COMMAND
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " ADICIONASINGLENOTES
+*&---------------------------------------------------------------------*
+*&      Form  USER_COMMAND
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form user_command using f_ucomm like sy-ucomm
      i_selfield type slis_selfield.
 
-  data f_subrc like sy-subrc,
+  data: f_subrc like sy-subrc,
         s_arseg like pmpoutttt.
   case f_ucomm.
     when '&IC1'.
@@ -1239,54 +1239,54 @@ form user_command using f_ucomm like sy-ucomm
       check sy-subrc = 0.
       case i_selfield-fieldname.
         when 'AUFNR'.
-          if s_arseg-aufnr  space.
+          if s_arseg-aufnr <> space.
             set parameter id 'ANR' field s_arseg-aufnr.
             call transaction 'IW32' and skip first screen.
           endif.
         when 'QMNUM'.
-          if s_arseg-qmnum  space.
+          if s_arseg-qmnum <> space.
             set parameter id 'IQM' field s_arseg-qmnum.
             call transaction 'IW22' and skip first screen.
           endif.
         when 'EQUNR'.
-          if s_arseg-equnr  space.
+          if s_arseg-equnr <> space.
             set parameter id 'EQN' field s_arseg-equnr.
             call transaction 'IE03' and skip first screen.
           endif.
         when 'KOSTV'.
-          if s_arseg-kostv  space.
+          if s_arseg-kostv <> space.
             set parameter id 'KOS' field s_arseg-kostv.
             set parameter id 'CAC' field '1000'.
             call transaction 'KS03' and skip first screen.
           endif.
         when 'KOSTL'.
-          if s_arseg-kostl  space.
+          if s_arseg-kostl <> space.
             set parameter id 'KOS' field s_arseg-kostl.
             set parameter id 'CAC' field '1000'.
             call transaction 'KS03' and skip first screen.
           endif.
           when 'DIFFDATE2'.
-          if s_arseg-aufnr  space.
+          if s_arseg-aufnr <> space.
             set parameter id 'ANR' field s_arseg-aufnr.
             call transaction 'IW43' and skip first screen.
           endif.
       endcase.
   endcase.
 
-endform.                     USERCOMAND
+endform.                    " USERCOMAND
 
 form pfstatus using pt_pfst type slis_t_extab.
 
        set pf-status 'ZPF_STATUS'.
 endform.
-&---------------------------------------------------------------------
-&      Form  STATUSEXCLUSIVO
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+*&---------------------------------------------------------------------*
+*&      Form  STATUSEXCLUSIVO
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form statusexclusivo .
   loop at pmpo.
     if pmpo-objnr is not initial.
@@ -1307,35 +1307,35 @@ form statusexclusivo .
        on jest~stat eq tj02t~istat
 
     where
-        objnr IN
-            viaufkst~objnr EQ pmpo-objnr AND
+*        objnr IN
+*            viaufkst~objnr EQ pmpo-objnr AND
              tj02t~spras eq sy-langu and
              tj02t~txt04 in staex and
              jest~inact ne 'X' and
              viaufkst~objnr in r_ordem.
-            viaufkst~aufnr IN s_nordem AND
-            viaufkst~auart IN s_tordem AND
-            viaufkst~ilart IN s_tativ  AND
-            viaufkst~kostl IN s_ccusto AND
-            viaufkst~iwerk IN s_snota  AND
-            viaufkst~kostv IN s_resp   AND
-            viaufkst~equnr IN s_nequip AND
-            viaufkst~ingpr IN s_gplan  AND
-            viaufkst~artpr EQ 'PM'.
+*            viaufkst~aufnr IN s_nordem AND
+*            viaufkst~auart IN s_tordem AND
+*            viaufkst~ilart IN s_tativ  AND
+*            viaufkst~kostl IN s_ccusto AND
+*            viaufkst~iwerk IN s_snota  AND
+*            viaufkst~kostv IN s_resp   AND
+*            viaufkst~equnr IN s_nequip AND
+*            viaufkst~ingpr IN s_gplan  AND
+*            viaufkst~artpr EQ 'PM'.
 
   sort excluir by objnr.
 
   clear r_ordem[].
 
-endform.                     STATUSEXCLUSIVO
-&---------------------------------------------------------------------
-&      Form  DELETAXCLUSIVAS
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " STATUSEXCLUSIVO
+*&---------------------------------------------------------------------*
+*&      Form  DELETAXCLUSIVAS
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form deletaxclusivas .
   if excluir[] is not initial.
     loop at pmpo.
@@ -1372,7 +1372,7 @@ form deletaxclusivas .
   clear pmpo[].
   clear pmpobuff[].
 
-  ranges r_cordem for viaufkst-objnr.Objeto da order
+  ranges: r_cordem for viaufkst-objnr."Objeto da order
 
   loop at pmpout.
     if pmpout-objnr is not initial.
@@ -1395,52 +1395,52 @@ form deletaxclusivas .
     case cost-wrttp.
       when '04'.
         cost2-objnr = cost-objnr.
-        if ( cost-wrt00  0 ).
+        if ( cost-wrt00 >< 0 ).
           cost2-wrt00 = cost-wrt00 + cost2-wrt00.
         endif.
-        if ( cost-wrt01  0 ).
+        if ( cost-wrt01 >< 0 ).
           cost2-wrt00 = cost-wrt01 + cost2-wrt00.
         endif.
-        if ( cost-wrt02  0 ).
+        if ( cost-wrt02 >< 0 ).
           cost2-wrt00 = cost-wrt02 + cost2-wrt00.
         endif.
-        if ( cost-wrt03  0  ).
+        if ( cost-wrt03 >< 0  ).
           cost2-wrt00 = cost-wrt03 + cost2-wrt00.
         endif.
-        if ( cost-wrt04  0  ).
+        if ( cost-wrt04 >< 0  ).
           cost2-wrt00 = cost-wrt04 + cost2-wrt00.
         endif.
-        if ( cost-wrt05  0  ).
+        if ( cost-wrt05 >< 0  ).
           cost2-wrt00 = cost-wrt05 + cost2-wrt00.
         endif.
-        if ( cost-wrt06  0  ).
+        if ( cost-wrt06 >< 0  ).
           cost2-wrt00 = cost-wrt06 + cost2-wrt00.
         endif.
-        if ( cost-wrt07  0  ).
+        if ( cost-wrt07 >< 0  ).
           cost2-wrt00 = cost-wrt07 + cost2-wrt00.
         endif.
-        if ( cost-wrt08  0  ).
+        if ( cost-wrt08 >< 0  ).
           cost2-wrt00 = cost-wrt08 + cost2-wrt00 .
         endif.
-        if ( cost-wrt09  0  ).
+        if ( cost-wrt09 >< 0  ).
           cost2-wrt00 = cost-wrt09 + cost2-wrt00.
         endif.
-        if ( cost-wrt10  0  ).
+        if ( cost-wrt10 >< 0  ).
           cost2-wrt00 = cost-wrt10 + cost2-wrt00.
         endif.
-        if ( cost-wrt11  0  ).
+        if ( cost-wrt11 >< 0  ).
           cost2-wrt00 = cost-wrt11 + cost2-wrt00.
         endif.
-        if ( cost-wrt12  0  ).
+        if ( cost-wrt12 >< 0  ).
           cost2-wrt00 = cost-wrt12 + cost2-wrt00.
         endif.
-        if ( cost-wrt13  0  ).
+        if ( cost-wrt13 >< 0  ).
           cost2-wrt00 = cost-wrt13 + cost2-wrt00.
         endif.
-        if ( cost-wrt14  0  ).
+        if ( cost-wrt14 >< 0  ).
           cost2-wrt00 = cost-wrt14 + cost2-wrt00.
         endif.
-        if ( cost-wrt15  0  ).
+        if ( cost-wrt15 >< 0  ).
           cost2-wrt00 = cost-wrt15 + cost2-wrt00.
         endif.
         append cost2.
@@ -1448,7 +1448,7 @@ form deletaxclusivas .
     endcase.
   endloop.
 
-  data vl_objnr type objnr.
+  data: vl_objnr type objnr.
 
   loop at cost2.
     if cost2-objnr ne vl_objnr.
@@ -1520,15 +1520,15 @@ form deletaxclusivas .
 
   sort pmpouttt by nobjnr.
   clear pmpoutt[].
-endform.                     DELETAXCLUSIVAS
-&---------------------------------------------------------------------
-&      Form  ADICIONASINGLEORDERS
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " DELETAXCLUSIVAS
+*&---------------------------------------------------------------------*
+*&      Form  ADICIONASINGLEORDERS
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form adicionasingleorders .
 
   select   viaufkst~objnr
@@ -1598,15 +1598,15 @@ form adicionasingleorders .
     clear pmpo.
   endloop.
 
-endform.                     ADICIONASINGLEORDERS
-&---------------------------------------------------------------------
-&      Form  Z_SELECT_VARIAVEL_ALV
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " ADICIONASINGLEORDERS
+*&---------------------------------------------------------------------*
+*&      Form  Z_SELECT_VARIAVEL_ALV
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form z_select_variavel_alv .
   st_varia-report = sy-repid.
 
@@ -1621,21 +1621,21 @@ form z_select_variavel_alv .
       program_error = 2
       others        = 3.
 
-  Caso tenha dado tudo certo será repassado o valor escolhido para a
- tela de seleção
+*  Caso tenha dado tudo certo será repassado o valor escolhido para a
+* tela de seleção
   if sy-subrc is initial.
     p_vari = st_varia-variant.
   endif.
 
-endform.                     Z_SELECT_VARIAVEL_ALV
-&---------------------------------------------------------------------
-&      Form  STATUSINCLUSIVO
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " Z_SELECT_VARIAVEL_ALV
+*&---------------------------------------------------------------------*
+*&      Form  STATUSINCLUSIVO
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form statusinclusivo .
 
   loop at pmpo.
@@ -1660,30 +1660,30 @@ form statusinclusivo .
           tj02t~txt04 in stain and
           jest~inact ne 'X' and
           viaufkst~objnr in r_ordem.
-           viaufkst~aufnr IN s_nordem AND
-           viaufkst~auart IN s_tordem AND
-           viaufkst~ilart IN s_tativ  AND
-           viaufkst~kostl IN s_ccusto AND
-           viaufkst~iwerk IN s_snota  AND
-           viaufkst~kostv IN s_resp   AND
-           viaufkst~equnr IN s_nequip AND
-           viaufkst~ingpr IN s_gplan  AND
-           viaufkst~artpr EQ 'PM'.
+*           viaufkst~aufnr IN s_nordem AND
+*           viaufkst~auart IN s_tordem AND
+*           viaufkst~ilart IN s_tativ  AND
+*           viaufkst~kostl IN s_ccusto AND
+*           viaufkst~iwerk IN s_snota  AND
+*           viaufkst~kostv IN s_resp   AND
+*           viaufkst~equnr IN s_nequip AND
+*           viaufkst~ingpr IN s_gplan  AND
+*           viaufkst~artpr EQ 'PM'.
 
   sort dominantes by objnr.
   clear r_ordem[].
 
-endform.                     STATUSINCLUSIVO
-&---------------------------------------------------------------------
-&      Form  SELECIONADATASNOTAS
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " STATUSINCLUSIVO
+*&---------------------------------------------------------------------*
+*&      Form  SELECIONADATASNOTAS
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form selecionadatasnotas .
-  ranges num_objn for viqmelst-objnr.Objeto da nota
+  ranges: num_objn for viqmelst-objnr.""Objeto da nota
 
   loop at pmpouttt.
 
@@ -1701,19 +1701,19 @@ form selecionadatasnotas .
            jcds~utime
       appending table notadatainicial
       from jcds
-    INNER JOIN viqmelst
-         ON viqmelst~objnr EQ jcds~objnr
+*    INNER JOIN viqmelst
+*         ON viqmelst~objnr EQ jcds~objnr
       where
-           viqmelst~artpr EQ 'PM' AND
+           "viqmelst~artpr EQ 'PM' AND
            jcds~stat eq 'I0068' and
            jcds~chind eq 'I' and
            jcds~objnr in num_objn.
-         viqmelst~qmnum IN s_nnota AND
-         viqmelst~kostl IN s_ccusto AND
-         viqmelst~equnr IN s_nequip AND
-         viqmelst~iwerk IN s_snota AND
-         viqmelst~qmart IN s_tnota AND
-         viqmelst~erdat IN s_dnota.
+*         viqmelst~qmnum IN s_nnota AND
+*         viqmelst~kostl IN s_ccusto AND
+*         viqmelst~equnr IN s_nequip AND
+*         viqmelst~iwerk IN s_snota AND
+*         viqmelst~qmart IN s_tnota AND
+*         viqmelst~erdat IN s_dnota.
 
   select jcds~objnr
          jcds~udate
@@ -1722,18 +1722,18 @@ form selecionadatasnotas .
          jcds~chind
   appending table notadatafinal
   from jcds
-    INNER JOIN viqmelst
-         ON jcds~objnr EQ viqmelst~objnr
+*    INNER JOIN viqmelst
+*         ON jcds~objnr EQ viqmelst~objnr
   where
-        viqmelst~artpr EQ 'PM' AND
+        "viqmelst~artpr EQ 'PM' AND
         jcds~stat eq 'I0072' and
         jcds~objnr in num_objn.
-          viqmelst~qmnum IN s_nnota AND
-          viqmelst~kostl IN s_ccusto AND
-          viqmelst~equnr IN s_nequip AND
-          viqmelst~iwerk IN s_snota AND
-          viqmelst~qmart IN s_tnota AND
-          viqmelst~erdat IN s_dnota.
+*          viqmelst~qmnum IN s_nnota AND
+*          viqmelst~kostl IN s_ccusto AND
+*          viqmelst~equnr IN s_nequip AND
+*          viqmelst~iwerk IN s_snota AND
+*          viqmelst~qmart IN s_tnota AND
+*          viqmelst~erdat IN s_dnota.
 
   select viaufkst~objnr
          jcds~udate
@@ -1745,11 +1745,11 @@ form selecionadatasnotas .
                     on jcds~objnr eq viqmelst~objnr
       inner join viaufkst
                     on viqmelst~aufnr eq viaufkst~aufnr
-     INNER JOIN viaufkst
-         ON jcds~objnr EQ viaufkst~objnr
+*     INNER JOIN viaufkst
+*         ON jcds~objnr EQ viaufkst~objnr
    where
         jcds~stat eq 'I0071' and
-         viaufkst~autyp EQ '30' AND
+*         viaufkst~autyp EQ '30' AND
         jcds~chind eq 'I' and
         jcds~objnr in num_objn.
 
@@ -1797,26 +1797,26 @@ form selecionadatasnotas .
   sort datasnotas by objnr.
 
   clear num_objn[].
-endform.                     SELECIONADATASNOTAS
-&---------------------------------------------------------------------
-&      Form  SELECIONDADATASORDENS
-&---------------------------------------------------------------------
-       text
-----------------------------------------------------------------------
-  --  p1        text
-  --  p2        text
-----------------------------------------------------------------------
+endform.                    " SELECIONADATASNOTAS
+*&---------------------------------------------------------------------*
+*&      Form  SELECIONDADATASORDENS
+*&---------------------------------------------------------------------*
+*       text
+*----------------------------------------------------------------------*
+*  -->  p1        text
+*  <--  p2        text
+*----------------------------------------------------------------------*
 form seleciondadatasordens .
-  ranges num_objeo for viaufkst-objnr.Objeto da order
+  ranges: num_objeo for viaufkst-objnr."Objeto da order
 
   loop at pmpouttt.
-    IF pmpouttt-objnr IS NOT INITIAL.
+    "IF pmpouttt-objnr IS NOT INITIAL.
     num_objeo-sign = 'I'.
     num_objeo-option = 'EQ'.
     num_objeo-low = pmpouttt-objnr.
     append num_objeo.
     clear num_objeo.
-    ENDIF.
+    "ENDIF.
   endloop.
 
   select jcds~objnr
@@ -1828,17 +1828,17 @@ form seleciondadatasordens .
   from jcds
 
   where
-       viaufkst~autyp EQ '30' AND
+       "viaufkst~autyp EQ '30' AND
        jcds~stat eq 'I0045' and
        jcds~objnr in num_objeo.
-         viaufkst~aufnr IN s_nordem AND
-         viaufkst~auart IN s_tordem AND
-         viaufkst~ilart IN s_tativ  AND
-         viaufkst~kostl IN s_ccusto AND
-         viaufkst~iwerk IN s_snota  AND
-         viaufkst~kostv IN s_resp   AND
-         viaufkst~equnr IN s_nequip AND
-         viaufkst~ingpr IN s_gplan .
+*         viaufkst~aufnr IN s_nordem AND
+*         viaufkst~auart IN s_tordem AND
+*         viaufkst~ilart IN s_tativ  AND
+*         viaufkst~kostl IN s_ccusto AND
+*         viaufkst~iwerk IN s_snota  AND
+*         viaufkst~kostv IN s_resp   AND
+*         viaufkst~equnr IN s_nequip AND
+*         viaufkst~ingpr IN s_gplan .
 
   loop at ordemdatafinal.
     if ordemdatafinal-objnr is not initial.
@@ -1883,14 +1883,14 @@ form seleciondadatasordens .
   clear ordemdatafinal[].
   clear ordemdatainicial[].
 
-  ranges d for afru-satza.
+  ranges: d for afru-satza.
   d-sign = 'I'.
   d-option = 'BT'.
   d-low = 'I20'.
   d-high = 'I40'.
   append d.
 
-  ranges num_ordap for viaufkst-aufnr.
+  ranges: num_ordap for viaufkst-aufnr.
   loop at pmpouttt.
 
     if pmpouttt-aufnr is not initial.
@@ -2031,16 +2031,16 @@ form seleciondadatasordens .
        importing
           seconds                     = sec.
 
-       result = sec  3600.
+       result = sec / 3600.
        split result at '.' into hh resto.
        sec = sec mod 3600.
-       mm = sec  60.
+       mm = sec / 60.
        sec = sec mod 60.
        ss = sec.
 
-       pmpoutttt-diffdate = hh + ( mm  60 ) + ( sec  3600 ).
+       pmpoutttt-diffdate = hh + ( mm / 60 ) + ( sec / 3600 ).
 
-       CONCATENATE HH '' MM '' SS INTO pmpoutttt-diffdatee.
+*       CONCATENATE HH ':' MM ':' SS INTO pmpoutttt-diffdatee.
 
        endif.
 
@@ -2069,14 +2069,14 @@ form seleciondadatasordens .
        importing
           seconds = sec.
 
-       result = sec  3600.
+       result = sec / 3600.
        split result at '.' into hh resto.
        sec = sec mod 3600.
-       mm = sec  60.
+       mm = sec / 60.
        sec = sec mod 60.
        ss = sec.
 
-       pmpoutttt-diffdate2 = hh + ( mm  60 ) + ( sec  3600 ).
+       pmpoutttt-diffdate2 = hh + ( mm / 60 ) + ( sec / 3600 ).
 
       endif.
 
@@ -2097,4 +2097,4 @@ form seleciondadatasordens .
 
   sort pmpoutttt by aufnr.
 
-endform.                     SELECIONDADATASORDENS
+endform.                    " SELECIONDADATASORDENS
