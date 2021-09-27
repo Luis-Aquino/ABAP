@@ -1,3 +1,3 @@
 Development for printing logs;
 Automatic fieldcat;
-Transaction Code - ZPP0036;
+Transaction Code - ZPP0036.
