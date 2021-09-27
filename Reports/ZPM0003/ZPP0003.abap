@@ -876,20 +876,24 @@ form montaalv .
   "gd_layout-edit              = 'X'. "makes whole ALV table editable
   "gd_layout-zebra             = 'X'.
   gd_repid = sy-repid.
+  if pmpoutttt[] is initial.
+    message 'Não existem notas/ordens com os parâmetros selecionados.' type 'I'.
+    stop.
+  endif.
   call function 'REUSE_ALV_GRID_DISPLAY'
     exporting
-      i_buffer_active         = space
-      i_callback_user_command = 'USER_COMMAND'
-*      i_callback_pf_status_set = 'ZPF_STATUS'
-      i_callback_program      = gd_repid
-      it_fieldcat             = i_fcat[]
-      i_save                  = 'A'
-      is_layout               = gd_layout
+      i_buffer_active          = space
+      i_callback_user_command  = 'USER_COMMAND'
+      i_callback_pf_status_set = 'PFSTATUS'
+      i_callback_program       = gd_repid
+      it_fieldcat              = i_fcat[]
+      i_save                   = 'A'
+      is_layout                = gd_layout
     tables
-      t_outtab                = pmpoutttt      "is_variant = st_varia
+      t_outtab                 = pmpoutttt      "is_variant = st_varia
     exceptions
-      program_error           = 1
-      others                  = 2.
+      program_error            = 1
+      others                   = 2.
 
   if sy-subrc <> 0.
 *    MESSAGE ID sy-msgid TYPE sy-msgty NUMBER sy-msgno
@@ -1234,6 +1238,26 @@ form user_command using f_ucomm like sy-ucomm
   data: f_subrc like sy-subrc,
         s_arseg like pmpoutttt.
   case f_ucomm.
+    when 'EXIT'.
+
+      leave program.
+
+    when '&REFRESH'.
+      perform selecionaall."Seleciona somente notas que possuem ordens, excluindo notas sem ordens associadas e ordens sem notas associadas: INNER JOIN.
+      perform montastatusnota."Monta o status das notas usando a função: STATUS_TEXT_EDIT, pois foi solicitado que o status aparecesse na ordem da iw23.
+      perform agrupastatus."Monta o status das ordens usando a função: STATUS_TEXT_EDIT, pois foi solicitado que o status aparecesse na ordem da iw33.
+      perform selecionaoutput."Associa a tabela do select geral com as tabelas de status .
+      if staex[] is not initial.
+        perform statusexclusivo."Status exclusivo onde são selecionadas as ordens que possuem o status inclusivo digitado e serão verificadas para exclusão.
+      endif.
+      if stain[] is not initial.
+        perform statusinclusivo."Status inclusivo onde são selecionadas as ordens que não possuem o status exclusivo digitado e serão verificadas para eAhamxclusão.
+      endif.
+      perform deletaxclusivas."Deleta as ordens de acordo com os filtros de inclusivo e exclusivo se houverem, sleciona informações de custos e seleciona novamente os valores de acordo com os filtros
+      perform selecionadatasnotas."Seleciona as datas de abertura das notas e fechamento das notas de acordo com os status I0068 e I0072 respectivamente.
+      perform seleciondadatasordens."Seelciona as datas de abertura, fechamento , primeiro e último apontamento da ordem, de acordo com o status I0001, I0045 e na tabela AFRU.
+      perform montafieldcat.
+      perform montaalv.
     when '&IC1'.
       read table pmpoutttt into s_arseg index i_selfield-tabindex.
       check sy-subrc = 0.
